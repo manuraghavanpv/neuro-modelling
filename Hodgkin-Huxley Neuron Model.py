@@ -10,7 +10,7 @@ E_Na = 50.0  # sodium reversal potential (mV)
 E_K = -77.0  # potassium reversal potential (mV)
 E_L = -54.387# leak reversal potential (mV)
 
-# Helper functions for gating variables
+# Helper functions (for gating variables)
 def alpha_m(V):
     return 0.1 * (V + 40.0) / (1.0 - np.exp(-(V + 40.0) / 10.0))
 
@@ -29,7 +29,7 @@ def alpha_n(V):
 def beta_n(V):
     return 0.125 * np.exp(-(V + 65.0) / 80.0)
 
-# Hodgkin-Huxley model
+# The Hodgkin-Huxley model
 def HH_model(I, V_init, dt, T):
     # Number of time steps
     num_steps = int(T / dt)
@@ -47,14 +47,14 @@ def HH_model(I, V_init, dt, T):
     h[0] = alpha_h(V_init) / (alpha_h(V_init) + beta_h(V_init))
     n[0] = alpha_n(V_init) / (alpha_n(V_init) + beta_n(V_init))
 
-    # Simulation loop
+    # Simulation 
     for i in range(1, num_steps):
         # Update gating variables
         m[i] = m[i - 1] + dt * (alpha_m(V[i - 1]) * (1 - m[i - 1]) - beta_m(V[i - 1]) * m[i - 1])
         h[i] = h[i - 1] + dt * (alpha_h(V[i - 1]) * (1 - h[i - 1]) - beta_h(V[i - 1]) * h[i - 1])
         n[i] = n[i - 1] + dt * (alpha_n(V[i - 1]) * (1 - n[i - 1]) - beta_n(V[i - 1]) * n[i - 1])
 
-        # Calculate membrane potential
+        # Membrane potential
         g_Na_m = g_Na * m[i] ** 3 * h[i]
         g_K_n = g_K * n[i] ** 4
         g_L_l = g_L
@@ -66,7 +66,7 @@ def HH_model(I, V_init, dt, T):
         # Total membrane current
         I_total = I_Na + I_K + I_L + I
 
-        # Update membrane potential
+        # Updating the membrane potential
         V[i] = V[i - 1] + dt * (1.0 / C_m) * (-I_total)
 
     return time, V
@@ -77,7 +77,7 @@ V_init = -65  # initial membrane potential (mV)
 dt = 0.01     # time step (ms)
 T = 50        # total simulation time (ms)
 
-# Run simulation
+# Running the simulation
 time, V = HH_model(I, V_init, dt, T)
 
 # Plotting
