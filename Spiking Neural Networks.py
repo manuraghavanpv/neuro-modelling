@@ -22,8 +22,8 @@ class SpikingNeuron:
                 self.membrane_potential = self.reset  # reset potential after firing
                 self.refractory_time = self.tau_ref  # set refractory period
 
-                return True  # neuron fired
-        return False  # neuron did not fire
+                return True  # neuron fires
+        return False  # neuron doesn't fire
 
 class SpikingNeuralNetwork:
     def __init__(self, num_neurons):
@@ -54,10 +54,10 @@ dt = 0.1
 simulation_time = 100
 num_neurons = 3
 
-# Create spiking neural network
+# Creating a spiking neural network
 snn = SpikingNeuralNetwork(num_neurons)
 
-# Input current (random for demonstration)
+# Input current (random)
 I_in = np.random.uniform(low=0, high=1, size=(int(simulation_time / dt)))
 
 # Simulate network
