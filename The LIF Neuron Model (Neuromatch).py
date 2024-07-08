@@ -1,4 +1,4 @@
-#LEAKY INTEGRATE AND FIRE NEURON MODEL: PART 1
+#LIF NEURON MODEL: PART 1
 
 #Imports
 import numpy as np
@@ -239,7 +239,7 @@ with plt.xkcd():
 ######################################################################################################################################
 
 
-#LEAKY INTEGRATE AND FIRE NEURON MODEL: PART 2
+#LIF NEURON MODEL: PART 2
 
 # Imports
 import numpy as np
